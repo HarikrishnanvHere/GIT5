@@ -19,7 +19,9 @@ const Sib = require('sib-api-v3-sdk');
 exports.postForgotPassword = async (req,res,next) =>{
 
     try{
+        //console.log(req);
         let recoveryMail = req.body.recoveryMail;
+        console.log(recoveryMail);
         let uuidv4 = uuid.v4();
 
         let user = await User.findOne({where: {email: recoveryMail}})
@@ -39,11 +41,11 @@ exports.postForgotPassword = async (req,res,next) =>{
         
         
         let BREVO_API_KEY = process.env.BREVO_API_KEY;
-        //console.log(BREVO_API_KEY);
+        console.log(BREVO_API_KEY);
 
         const client = Sib.ApiClient.instance;
         const apiKey = client.authentications['api-key'];
-        //console.log(apiKey);
+        console.log(apiKey);
         apiKey.apiKey = BREVO_API_KEY;
         const tranEmailApi = new Sib.TransactionalEmailsApi()
 
@@ -68,7 +70,7 @@ exports.postForgotPassword = async (req,res,next) =>{
             console.log(data);
             res.status(201).json({message: "e-mail successfully sent!!"})
         } )
-        .catch(err=>res.status(401).json({message: "please enter a valid mail id"}))
+        .catch(err=>console.log(err));
     }catch(err){
         console.log(err);
         res.status(401).json({message: err});

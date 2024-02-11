@@ -3,7 +3,7 @@ let router = express.Router();
 
 let passwordController = require('../controllers/password')
 
-router.post('/forgotpassword',passwordController.postForgotPassword);
+router.use('/forgotpassword',passwordController.postForgotPassword);
 
 router.get('/resetpassword/:uuidv4',passwordController.getResetPassword);
 

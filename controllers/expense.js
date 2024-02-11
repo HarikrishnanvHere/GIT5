@@ -12,6 +12,7 @@ app.use(cors());
 
 let AWS = require('aws-sdk');
 let dotenv = require('dotenv');
+const { SendReport } = require('sib-api-v3-sdk');
 dotenv.config();
 
 
@@ -71,6 +72,7 @@ exports.getExpense =async  (req,res,next) =>{
     }
     catch(err){
         console.log(err);
+        res.send("Not Authorized");
     }
 }
 

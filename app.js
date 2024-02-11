@@ -44,6 +44,10 @@ app.use('/expense', expenseRoutes);
 app.use('/premium',premiumRoutes);
 app.use('/password',passwordRoutes);
 
+app.use('/', (req,res,next) =>{
+    res.sendFile(path.join(__dirname, `public/${req.url}`))
+})
+
 
 
 
